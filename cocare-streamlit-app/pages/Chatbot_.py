@@ -533,43 +533,42 @@ div[data-testid="stButton"] button {{
 
 
 
+st.markdown(f"""
+<style>
 div[data-testid="stForm"] {{
-    position:fixed !important;
-    bottom:18px !important;
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    width:398px !important;
-    z-index:999999 !important;
-    background:white !important;
-    padding:10px !important;
-    border-radius:28px !important;
-    box-shadow:0 4px 15px rgba(0,0,0,.12) !important;
-    border:none !important;
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    z-index: 10 !important;
+    background: white !important;
+    padding: 10px !important;
+    border-radius: 28px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,.12) !important;
+    border: none !important;
+    margin-top: 8px !important;
 }}
-
-
 
 div[data-testid="stTextInput"] input {{
-    border:none !important;
-    box-shadow:none !important;
-    background:transparent !important;
-    font-size:14px !important;
-    direction:{direction} !important;
-    text-align:{align} !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #f8fafc !important;
+    font-size: 14px !important;
+    direction: {direction} !important;
+    text-align: {align} !important;
 }}
 
-
-
 div[data-testid="stFormSubmitButton"] button {{
-    width:42px !important;
-    height:42px !important;
-    min-height:42px !important;
-    border:none !important;
-    border-radius:50% !important;
-    background:#1677e8 !important;
-    color:white !important;
-    font-size:18px !important;
-    font-weight:900 !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    border: none !important;
+    border-radius: 50% !important;
+    background: #1677e8 !important;
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: 900 !important;
 }}
 </style>
 """, unsafe_allow_html=True)
