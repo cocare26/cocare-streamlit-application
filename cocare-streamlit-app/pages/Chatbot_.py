@@ -333,14 +333,10 @@ html, body, [data-testid="stAppViewContainer"] {{
     direction:{direction} !important;
 }}
 
-
-
 header, footer, #MainMenu, [data-testid="stToolbar"] {{
     display:none !important;
     visibility:hidden !important;
 }}
-
-
 
 .block-container {{
     width:430px !important;
@@ -348,14 +344,12 @@ header, footer, #MainMenu, [data-testid="stToolbar"] {{
     height:820px !important;
     max-height:820px !important;
     margin:20px auto !important;
-    padding:20px 16px 90px !important;
+    padding:20px 16px 20px !important;
     background:linear-gradient(180deg,#c7e6fb,#dff1ff) !important;
     border-radius:38px !important;
     box-shadow:0 12px 35px rgba(0,0,0,.12) !important;
     overflow:hidden !important;
 }}
-
-
 
 .top-card {{
     background:white;
@@ -365,18 +359,14 @@ header, footer, #MainMenu, [data-testid="stToolbar"] {{
     align-items:center;
     justify-content:space-between;
     box-shadow:0 5px 15px rgba(0,0,0,.10);
-    margin-bottom:16px;
+    margin-bottom:12px;
 }}
-
-
 
 .location {{
     font-size:11px;
     font-weight:800;
     color:#0f2446;
 }}
-
-
 
 .ready {{
     font-size:13px;
@@ -387,8 +377,6 @@ header, footer, #MainMenu, [data-testid="stToolbar"] {{
     gap:6px;
 }}
 
-
-
 .dot {{
     width:7px;
     height:7px;
@@ -396,8 +384,6 @@ header, footer, #MainMenu, [data-testid="stToolbar"] {{
     border-radius:50%;
     display:inline-block;
 }}
-
-
 
 .avatar-top {{
     width:42px;
@@ -408,47 +394,38 @@ header, footer, #MainMenu, [data-testid="stToolbar"] {{
     box-shadow:0 3px 10px rgba(0,0,0,.15);
 }}
 
-
-
 .quick-title {{
     color:#0f2446;
     font-size:12px;
     font-weight:900;
-    margin:8px 0 10px;
+    margin:6px 0 8px;
     text-align:{align};
 }}
 
-
-
 div[data-testid="column"] {{
-    padding:4px !important;
+    padding:3px !important;
 }}
-
-
 
 div[data-testid="stButton"] button {{
     width:100%;
-    min-height:40px;
+    min-height:36px;
     border:none !important;
     border-radius:18px !important;
     background:white !important;
     color:#003f88 !important;
     font-weight:700 !important;
-    font-size:13px !important;
+    font-size:12px !important;
     box-shadow:0 5px 14px rgba(0,0,0,.10) !important;
 }}
 
-
-
 .chat-area {{
-    height:370px;
+    height:410px;
     overflow-y:auto;
     padding:10px 4px;
-    margin-top:12px;
-    margin-bottom:10px;
+    margin-top:8px;
+    margin-bottom:8px;
+    background:transparent;
 }}
-
-
 
 .message-row {{
     display:flex;
@@ -457,19 +434,13 @@ div[data-testid="stButton"] button {{
     margin-bottom:12px;
 }}
 
-
-
 .bot-row {{
     justify-content:flex-start;
 }}
 
-
-
 .user-row {{
     justify-content:flex-end;
 }}
-
-
 
 .msg {{
     max-width:72%;
@@ -482,8 +453,6 @@ div[data-testid="stButton"] button {{
     box-shadow:0 3px 10px rgba(0,0,0,.08);
 }}
 
-
-
 .bot {{
     background:white;
     color:#111827;
@@ -491,8 +460,6 @@ div[data-testid="stButton"] button {{
     text-align:{align};
     direction:{direction};
 }}
-
-
 
 .user {{
     background:#1677e8;
@@ -502,8 +469,6 @@ div[data-testid="stButton"] button {{
     direction:{direction};
 }}
 
-
-
 .msg-avatar, .user-avatar {{
     width:34px;
     height:34px;
@@ -511,15 +476,11 @@ div[data-testid="stButton"] button {{
     flex-shrink:0;
 }}
 
-
-
 .msg-avatar {{
     object-fit:cover;
     background:white;
     box-shadow:0 2px 8px rgba(0,0,0,.12);
 }}
-
-
 
 .user-avatar {{
     background:#dbeafe;
@@ -531,52 +492,48 @@ div[data-testid="stButton"] button {{
     font-weight:900;
 }}
 
-
-
-st.markdown(f"""
-<style>
 div[data-testid="stForm"] {{
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100% !important;
-    z-index: 10 !important;
-    background: white !important;
-    padding: 10px !important;
-    border-radius: 28px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,.12) !important;
-    border: none !important;
-    margin-top: 8px !important;
+    position:relative !important;
+    bottom:auto !important;
+    left:auto !important;
+    transform:none !important;
+    width:100% !important;
+    z-index:10 !important;
+    background:white !important;
+    padding:10px !important;
+    border-radius:28px !important;
+    box-shadow:0 4px 15px rgba(0,0,0,.12) !important;
+    border:none !important;
+    margin-top:6px !important;
+}}
+
+div[data-testid="stForm"] > div {{
+    gap:8px !important;
 }}
 
 div[data-testid="stTextInput"] input {{
-    border: none !important;
-    box-shadow: none !important;
-    background: #f8fafc !important;
-    font-size: 14px !important;
-    direction: {direction} !important;
-    text-align: {align} !important;
+    border:none !important;
+    box-shadow:none !important;
+    background:#f8fafc !important;
+    font-size:14px !important;
+    direction:{direction} !important;
+    text-align:{align} !important;
 }}
 
 div[data-testid="stFormSubmitButton"] button {{
-    width: 42px !important;
-    height: 42px !important;
-    min-height: 42px !important;
-    border: none !important;
-    border-radius: 50% !important;
-    background: #1677e8 !important;
-    color: white !important;
-    font-size: 18px !important;
-    font-weight: 900 !important;
+    width:42px !important;
+    height:42px !important;
+    min-height:42px !important;
+    border:none !important;
+    border-radius:50% !important;
+    background:#1677e8 !important;
+    color:white !important;
+    font-size:18px !important;
+    font-weight:900 !important;
 }}
+
 </style>
 """, unsafe_allow_html=True)
-
-
-
-
-
 # =========================
 # TOP CARD
 # =========================
