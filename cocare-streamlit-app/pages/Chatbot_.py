@@ -305,24 +305,13 @@ else:
 # =========================
 # LANGUAGE SWITCH
 # =========================
-lang_choice = st.segmented_control(
-    "",
-    ["العربية", "English"],
-    default="العربية" if st.session_state["language"] == "ar" else "English"
-)
+if "language" not in st.session_state:
+    st.session_state["language"] = "ar"
 
-
-
-new_lang = "ar" if lang_choice == "العربية" else "en"
-
-
-
-if new_lang != st.session_state["language"]:
-    st.session_state["language"] = new_lang
-    st.session_state[CHAT_KEY] = [("bot", WELCOME[new_lang])]
-    reset_context()
-    st.rerun()
-
+lang = st.session_state["language"]
+t = TEXTS[lang]
+direction = "rtl" if lang == "ar" else "ltr"
+align = "right" if lang == "ar" else "left"
 
 
 lang = st.session_state["language"]
