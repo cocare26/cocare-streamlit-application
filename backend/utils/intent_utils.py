@@ -56,7 +56,57 @@ def rule_based_override(text):
         "شكرا", "شكراً", "مشكور", "يسلمو", "يعطيك العافيه",
         "يعطيك العافية", "thank you", "thanks", "كفو", "ما قصرت"
     }
+        # =========================
 
+    # Renew Package
+
+    # =========================
+
+    if re.search(r"(جدد|تجديد|الباقه|الباقة|اشترك|اشتراك)", t):
+
+        return "renew_package"
+ 
+    # =========================
+
+    # Check Data Usage
+
+    # =========================
+
+    if re.search(r"(استهلاك|استهلك|المتبقي|المتبقي لدي|النت المتبقي|البيانات)", t):
+
+        return "check_data_usage"
+ 
+    # =========================
+
+    # Offers Inquiry
+
+    # =========================
+
+    if re.search(r"(العروض|العرض|الالعاب|الألعاب|games|offers)", t):
+
+        return "offer_inquiry"
+ 
+    # =========================
+
+    # International Calls
+
+    # =========================
+
+    if re.search(r"(المكالمات الدوليه|المكالمات الدولية|دوليه|دولية|international)", t):
+
+        return "offer_inquiry"
+ 
+    # =========================
+
+    # Technical Support
+
+    # =========================
+
+    if re.search(r"(الدعم الفني|دعم فني|التواصل مع الدعم|support)", t):
+
+        return "technical_support"
+
+    
     if t in greetings:
         return "greeting"
 
