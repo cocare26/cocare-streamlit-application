@@ -407,6 +407,22 @@ def get_intent_response(lang, intent):
             return "I understand, it looks like there may be a signal issue.", "Can you confirm your selected area?"
         if intent == "network_status":
             return "Let me check the network status for your area.", "Which service are you having trouble with?"
+        if intent == "renew_package":
+
+            return "يمكنك تجديد الباقة من التطبيق بسهولة.", "هل تريد تجديد نفس الباقة الحالية؟"
+ 
+        if intent == "check_data_usage":
+
+            return "يمكنك معرفة استهلاك الإنترنت من لوحة التحكم.", "هل تريد معرفة المتبقي من الباقة؟"
+ 
+        if intent == "offer_inquiry":
+
+            return "توجد عروض وباقات متنوعة متاحة حالياً.", "هل تبحث عن عروض إنترنت أم مكالمات؟"
+ 
+        if intent == "technical_support":
+
+            return "تم تحويل طلبك إلى الدعم الفني.", "هل يمكنك شرح المشكلة بشكل أكبر؟"
+     
         if intent in ["network_complaint", "complaint"]:
             return "Sorry for the inconvenience. We will follow up on this issue.", "Has this happened more than once?"
         return "Can you explain a little more?", "Tell me more details."
