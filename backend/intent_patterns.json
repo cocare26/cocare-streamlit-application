@@ -1,0 +1,67 @@
+{
+  "no_signal": [
+    "no signal",
+    "weak signal",
+    "signal issue",
+    "coverage issue",
+    "network coverage is bad",
+    "coverage is bad",
+    "bad coverage",
+    "weak coverage",
+    "ما في اشارة",
+    "ضعف اشارة",
+    "إشارة"
+  ],
+  "network_complaint": [
+    "angry about internet",
+    "internet is terrible",
+    "internet is bad",
+    "bad network",
+    "network is terrible",
+    "internet problem",
+    "network problem",
+    "i am angry",
+    "internet sucks",
+    "service is bad"
+  ],
+  "slow_internet": [
+    "slow internet",
+    "internet is slow",
+    "my internet is slow",
+    "my internet is very slow",
+    "weak internet",
+    "internet keeps disconnecting",
+    "keeps disconnecting",
+    "unstable connection",
+    "النت بطيء",
+    "بطيء",
+    "تقطيع"
+  ],
+  "check_data_usage": [
+    "data usage",
+    "remaining data",
+    "internet usage",
+    "check my data",
+    "how much data",
+    "كم باقي",
+    "استهلاك",
+    "بيانات"
+  ],
+  "renew_package": [
+    "renew package",
+    "renew my package",
+    "renew my internet package",
+    "internet package",
+    "تجديد الباقة",
+    "جدد الباقة"
+  ],
+  "offer_inquiry": [
+    "gaming offers",
+    "what gaming offers do you have",
+    "internet offers",
+    "offers",
+    "games",
+    "العروض",
+    "الألعاب"
+  ]
+}
