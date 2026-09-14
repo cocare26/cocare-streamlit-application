@@ -104,18 +104,6 @@ def normalize_sentiment(label):
     return "neutral"
 
 
-def find_existing_model(candidates):
-    """
-    Return the first existing model directory.
-    """
-
-    for path in candidates:
-        if path.exists():
-            return path
-
-    return None
-
-
 def find_joblib_model(model_dir):
     """
     Look for common sklearn/joblib model filenames.
@@ -123,6 +111,8 @@ def find_joblib_model(model_dir):
 
     if model_dir is None:
         return None
+
+    model_dir = Path(model_dir)
 
     possible_files = [
         model_dir / "model.pkl",
@@ -140,11 +130,14 @@ def find_joblib_model(model_dir):
 
 def is_transformer_model(model_dir):
     """
-    Detect whether a folder looks like a Hugging Face model.
+    Detect whether a folder contains
+    a usable Hugging Face model.
     """
 
     if model_dir is None:
         return False
+
+    model_dir = Path(model_dir)
 
     config_file = model_dir / "config.json"
 
@@ -155,8 +148,54 @@ def is_transformer_model(model_dir):
 
     return (
         config_file.exists()
-        and any(path.exists() for path in weight_files)
+        and any(
+            path.exists()
+            for path in weight_files
+        )
     )
+
+
+def find_existing_model(candidates):
+    """
+    Find the first usable sentiment model.
+
+    A usable model can be:
+    1. Hugging Face Transformer model
+    2. Joblib / pickle classifier
+
+    Also checks one folder level inside
+    each candidate directory.
+    """
+
+    for candidate in candidates:
+
+        candidate = Path(candidate)
+
+        if not candidate.exists():
+            continue
+
+        # Check candidate directory itself
+        if (
+            is_transformer_model(candidate)
+            or find_joblib_model(candidate) is not None
+        ):
+            return candidate
+
+        # Check one folder level inside
+        if candidate.is_dir():
+
+            for child in candidate.iterdir():
+
+                if not child.is_dir():
+                    continue
+
+                if (
+                    is_transformer_model(child)
+                    or find_joblib_model(child) is not None
+                ):
+                    return child
+
+    return None
 
 
 # ============================================================
@@ -180,6 +219,7 @@ def load_sentiment_model(lang):
     if lang == "ar":
         cached_model = sentiment_model_ar
         candidates = AR_MODEL_CANDIDATES
+
     else:
         cached_model = sentiment_model_en
         candidates = EN_MODEL_CANDIDATES
@@ -194,7 +234,7 @@ def load_sentiment_model(lang):
     if model_dir is None:
         print(
             f"[SENTIMENT WARNING] "
-            f"No sentiment model directory found for language: {lang}"
+            f"No usable sentiment model found for language: {lang}"
         )
 
         return None
@@ -233,6 +273,12 @@ def load_sentiment_model(lang):
                 sentiment_model_en = classifier
                 sentiment_type_en = "transformer"
 
+            print(
+                f"[SENTIMENT] "
+                f"{lang.upper()} transformer model loaded from: "
+                f"{model_dir}"
+            )
+
             return classifier
 
         except Exception as exc:
@@ -262,6 +308,12 @@ def load_sentiment_model(lang):
             else:
                 sentiment_model_en = classifier
                 sentiment_type_en = "joblib"
+
+            print(
+                f"[SENTIMENT] "
+                f"{lang.upper()} joblib model loaded from: "
+                f"{joblib_path}"
+            )
 
             return classifier
 
