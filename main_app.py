@@ -24,7 +24,7 @@ elif page == "contact":
 elif page == "report":
     st.switch_page("pages/ReportProblem.py")
 
-elif page == "settings_ar":  
+elif page == "settings_ar":
     st.switch_page("pages/11_settingar.py")
 
 else:
