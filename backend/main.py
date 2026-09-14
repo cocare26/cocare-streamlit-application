@@ -6,8 +6,12 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from cocare import process_message
-from database.db_helper import fetch_all
+try:
+    from backend.cocare import process_message
+    from backend.database.db_helper import fetch_all
+except ImportError:
+    from cocare import process_message
+    from database.db_helper import fetch_all
 
 
 # ============================================================
@@ -35,13 +39,6 @@ app = FastAPI(
 # ============================================================
 # CORS
 # ============================================================
-#
-# For the academic prototype, CORS origins can be configured
-# through the CORS_ORIGINS environment variable.
-#
-# Example:
-# CORS_ORIGINS=http://localhost:8501,http://localhost:3000
-#
 
 cors_origins = os.getenv(
     "CORS_ORIGINS",
