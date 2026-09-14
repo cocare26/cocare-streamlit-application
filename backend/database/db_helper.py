@@ -1,39 +1,60 @@
 from database.database import get_connection
 
 
-# =========================
+# ============================================================
 # Fetch Data
-# =========================
+# ============================================================
+
 def fetch_all(query, params=()):
+    """
+    Execute a SELECT query and return all rows.
+    """
+
     conn = get_connection()
-    cur = conn.cursor()
 
-    cur.execute(query, params)
+    try:
+        cur = conn.cursor()
+        cur.execute(query, params)
 
-    rows = cur.fetchall()
+        return cur.fetchall()
 
-    conn.close()
+    finally:
+        conn.close()
 
-    return rows
 
-
-# =========================
+# ============================================================
 # Execute Query
-# =========================
+# ============================================================
+
 def execute(query, params=()):
+    """
+    Execute an INSERT / UPDATE / DELETE query.
+    """
+
     conn = get_connection()
-    cur = conn.cursor()
 
-    cur.execute(query, params)
+    try:
+        cur = conn.cursor()
+        cur.execute(query, params)
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+
+    except Exception:
+        conn.rollback()
+        raise
+
+    finally:
+        conn.close()
 
 
-# =========================
+# ============================================================
 # Save Chat Log
-# =========================
+# ============================================================
+
 def save_chat_log(row):
+    """
+    Save a processed customer message to the chat_logs table.
+    """
 
     query = """
     INSERT INTO chat_logs (
@@ -77,7 +98,7 @@ def save_chat_log(row):
         int(bool(row.get("escalation"))),
         row.get("reason"),
         row.get("repeat_count"),
-        row.get("area_issue_count")
+        row.get("area_issue_count"),
     )
 
     execute(query, params)
