@@ -1,14 +1,22 @@
 import streamlit as st
 
-st.set_page_config(page_title="App", layout="centered")
+# =====================================
+# Page Configuration
+# =====================================
+st.set_page_config(
+    page_title="CoCare",
+    page_icon="📱",
+    layout="centered"
+)
 
-page = st.query_params.get("page")
+# =====================================
+# Read Query Parameter
+# =====================================
+page = st.query_params.get("page", "")
 
-if page:
-    page = page[0]
-else:
-    page = ""
-
+# =====================================
+# Page Navigation
+# =====================================
 if page == "change_password":
     st.switch_page("pages/ChangePassword.py")
 
@@ -25,7 +33,7 @@ elif page == "report":
     st.switch_page("pages/ReportProblem.py")
 
 elif page == "settings_ar":
-    st.switch_page("pages/11_settingar.py")
+    st.switch_page("pages/settingar.py")
 
 else:
     st.switch_page("pages/Settings.py")
