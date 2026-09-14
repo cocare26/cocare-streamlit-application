@@ -1107,6 +1107,18 @@ def log_chat(
         "area_issue_count": result.get(
             "area_issue_count"
         ),
+
+        "priority": result.get(
+            "priority"
+        ),
+
+        "suggested_action": result.get(
+            "suggested_action"
+        ),
+
+        "show_to_customer": result.get(
+            "show_to_customer"
+        ),
     }
 
     try:
@@ -1117,8 +1129,6 @@ def log_chat(
             "SQLite save error:",
             exc,
         )
-
-
 # ============================================================
 # Main CoCare Processing Pipeline
 # ============================================================
