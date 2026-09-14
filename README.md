@@ -64,6 +64,8 @@ Response / Alert / Escalation
 - Plotly
 - SQLite
 - NLP
+- FastAPI
+- Flutter / Dart (mobile UI prototype)
 
 ## Current Project Status
 
@@ -72,6 +74,8 @@ CoCare is currently a functional academic prototype.
 The current version demonstrates the integration of AI-based customer support, sentiment analysis, network issue prediction, and customer/employee dashboards.
 
 The prototype is not currently connected to live telecom infrastructure, real customer accounts, production billing systems, or live network APIs. Network-related testing currently relies on simulated telecom data.
+
+A basic FastAPI backend prototype and an initial Flutter mobile interface prototype are also included as part of the system's future integration exploration.
 
 ## Future Vision
 
