@@ -36,6 +36,7 @@ importlib.invalidate_caches()
 from utils.language_utils import detect_language
 from utils.intent_utils import predict_intent
 from utils.sentiment_utils import predict_sentiment
+from utils.prediction_utils import predict_network_issue
 
 
 # ============================================================
@@ -274,10 +275,6 @@ def predict_intent_safe(user_message, lang):
     except Exception as exc:
         print("Intent model error:", exc)
 
-    # --------------------------------------------------------
-    # Fallback Rules
-    # --------------------------------------------------------
-
     if any(
         word in text
         for word in [
@@ -505,14 +502,11 @@ def safe_prediction(
     sentiment=None,
 ):
     """
-    Prototype network decision layer.
+    Use the trained XGBoost model when compatible telecom KPI data
+    is available.
 
-    The trained XGBoost network prediction model exists
-    separately in the prediction module.
-
-    This backend currently uses rule-based network detection
-    until live/simulated telecom KPIs are connected to the
-    prediction model.
+    If KPI data is unavailable, fall back to the prototype
+    rule-based network detection logic.
     """
 
     if not metrics.get(
@@ -520,6 +514,20 @@ def safe_prediction(
         False,
     ):
         return 0
+
+    try:
+        model_prediction = predict_network_issue(
+            metrics
+        )
+
+        if model_prediction is not None:
+            return int(model_prediction)
+
+    except Exception as exc:
+        print(
+            "XGBoost prediction error:",
+            exc,
+        )
 
     if is_network_intent(intent):
         return 1
@@ -768,7 +776,6 @@ def notification_engine(
         "Network issue detected"
     )
 
-    # Area-wide problem
     if (
         area_issue_count >= 5
         and show_to_customer == 1
@@ -786,7 +793,6 @@ def notification_engine(
 
         reason = "Area-wide issue"
 
-    # Repeated individual problem
     elif repeat_count >= escalate_after:
 
         escalation = True
@@ -863,10 +869,6 @@ def get_intent_response(
 ):
 
     intent = normalize_intent(intent)
-
-    # --------------------------------------------------------
-    # English
-    # --------------------------------------------------------
 
     if lang == "en":
 
@@ -946,10 +948,6 @@ def get_intent_response(
                 "Tell me more about how I can help.",
             ),
         )
-
-    # --------------------------------------------------------
-    # Arabic
-    # --------------------------------------------------------
 
     negative_prefix = ""
 
@@ -1132,10 +1130,6 @@ def process_message(
     region="Unknown",
 ):
 
-    # -----------------------
-    # Language Detection
-    # -----------------------
-
     try:
         lang = detect_language(
             user_message
@@ -1149,10 +1143,6 @@ def process_message(
 
         lang = "en"
 
-    # -----------------------
-    # Intent Classification
-    # -----------------------
-
     (
         intent,
         intent_confidence,
@@ -1161,10 +1151,6 @@ def process_message(
         lang,
     )
 
-    # -----------------------
-    # Sentiment Analysis
-    # -----------------------
-
     (
         sentiment,
         sentiment_score,
@@ -1172,10 +1158,6 @@ def process_message(
         user_message,
         lang,
     )
-
-    # -----------------------
-    # Network Context
-    # -----------------------
 
     if is_network_intent(intent):
 
@@ -1199,19 +1181,11 @@ def process_message(
         metrics=metrics,
     )
 
-    # -----------------------
-    # Network Prediction Layer
-    # -----------------------
-
     prediction = safe_prediction(
         metrics=metrics,
         intent=intent,
         sentiment=sentiment,
     )
-
-    # -----------------------
-    # Chatbot Response
-    # -----------------------
 
     (
         response,
@@ -1222,20 +1196,12 @@ def process_message(
         sentiment=sentiment,
     )
 
-    # -----------------------
-    # Notification Engine
-    # -----------------------
-
     notification = notification_engine(
         prediction=prediction,
         sentiment=sentiment,
         metrics=metrics,
         intent=intent,
     )
-
-    # -----------------------
-    # Final Result
-    # -----------------------
 
     result = {
 
@@ -1269,10 +1235,6 @@ def process_message(
 
         "region": region,
     }
-
-    # -----------------------
-    # Save Interaction
-    # -----------------------
 
     log_chat(
         user_message,
