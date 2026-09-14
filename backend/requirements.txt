@@ -1,19 +1,25 @@
+# Web API
 fastapi
 uvicorn[standard]
 python-multipart
 
+# Application
 streamlit
+requests
+
+# Data Processing & Machine Learning
 pandas
 numpy
 scikit-learn
+xgboost
 joblib
 
+# NLP / Transformers
 torch
 transformers
 sentencepiece
 
+# Utilities
 matplotlib
 deep-translator
 langdetect
-
-requests
