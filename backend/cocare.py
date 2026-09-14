@@ -6,7 +6,10 @@ import types
 
 import pandas as pd
 
-from database.db_helper import save_chat_log, fetch_all
+try:
+    from backend.database.db_helper import save_chat_log, fetch_all
+except ImportError:
+    from database.db_helper import save_chat_log, fetch_all
 
 
 # ============================================================
