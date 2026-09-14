@@ -75,9 +75,12 @@ def save_chat_log(row):
         escalation,
         reason,
         repeat_count,
-        area_issue_count
+        area_issue_count,
+        priority,
+        suggested_action,
+        show_to_customer
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
 
     params = (
@@ -99,6 +102,9 @@ def save_chat_log(row):
         row.get("reason"),
         row.get("repeat_count"),
         row.get("area_issue_count"),
+        row.get("priority"),
+        row.get("suggested_action"),
+        int(bool(row.get("show_to_customer"))),
     )
 
     execute(query, params)
