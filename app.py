@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import base64
-from database import init_db
+from backend.database.database import init_db
 
 init_db()
 
