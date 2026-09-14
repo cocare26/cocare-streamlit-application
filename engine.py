@@ -180,7 +180,7 @@ def predict_intent_safe(user_message, lang="en"):
     if any(w in text for w in ["هاي", "هلا", "مرحبا", "hello", "hi", "كيفك"]):
         return "greeting", 0.8
 
-    if any(w in text for w in ["بطيء", "ضعيف", "ضعيفة", "slow", "زفت", "خرا", "تقطيع", "سرعة"]):
+    if any(w in text for w in ["بطيء", "ضعيف", "ضعيفة", "slow", "تقطيع", "سرعة]):
         return "slow_internet", 0.8
 
     if any(w in text for w in ["اشارة", "إشارة", "signal", "فاصل", "no signal"]):
@@ -203,7 +203,7 @@ def predict_sentiment_safe(user_message, lang="en"):
 
     text = str(user_message).lower()
 
-    if any(w in text for w in ["خرا", "زفت", "سيء", "بطيء", "ضعيف", "ضعيفة", "تخزي", "مشكلة", "bad", "slow", "angry"]):
+    if any(w in text for w in ["سيء", "بطيء", "ضعيف", "ضعيفة", "تخزي", "مشكلة", "bad", "slow", "angry"]):
         return "negative", 0.9
 
     if any(w in text for w in ["ممتاز", "تمام", "شكرا", "يسلمو", "good", "great", "thanks"]):
@@ -516,7 +516,7 @@ def log_chat(user_message, result):
 # =========================
 # Main Function
 # =========================
-def process_message(user_message, metrics=None, user_id="customer_1", region="Amman"):
+def process_message(user_message, metrics=None, user_id="customer_1", region="Unknown"):
     try:
         lang = detect_language(user_message)
     except:
